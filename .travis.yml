@@ -6,5 +6,6 @@ env:
   - TOXENV=flake8
 install:
   - pip install tox
+  - mkdir -p .config/currency_converter
 script:
   - make test
