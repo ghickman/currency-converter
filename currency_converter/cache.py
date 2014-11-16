@@ -9,7 +9,7 @@ def get_cache_path():
     if not os.path.exists(cache_dir):
         os.mkdir(cache_dir)
 
-    return os.path.join(cache_dir, 'convertion_rates.pickle')
+    return os.path.join(cache_dir, 'cache.pickle')
 
 
 def get_cache():
