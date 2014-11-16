@@ -10,6 +10,7 @@ from currency_converter.main import (cached_rate, cli, convert,
 
 @pytest.fixture
 def fake_cache():
+    """Build a fake cache dictionary."""
     return {('usd', 'gbp'): 0.6}
 
 
