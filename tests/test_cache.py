@@ -29,10 +29,3 @@ def test_get_missing_cache():
     get_cache_path = 'currency_converter.cache.get_cache_path'
     with unittest.mock.patch(get_cache_path, lambda: ''):
         assert get_cache() == {}
-
-
-def test_write_cache(fake_cache):
-    """Check the cache can be written to disk."""
-    with unittest.mock.patch('pickle.dump', fake_cache):
-        # mock pickle.dump and compare in mem vs fake cache?
-        pass
