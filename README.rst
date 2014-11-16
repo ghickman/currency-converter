@@ -3,6 +3,31 @@ Currency Converter
 
 A simple currency converter with caching for offline usage.
 
+.. image:: https://pypip.in/version/currency-converter/badge.svg
+    :target: https://pypi.python.org/pypi/currency-converter/?text=version
+    :alt: Latest Version
+
+.. image:: https://pypip.in/py_versions/currency-converter/badge.svg
+    :target: https://pypi.python.org/pypi/currency-converter/
+    :alt: Supported Python versions
+
+.. image:: https://pypip.in/status/currency-converter/badge.svg
+    :target: https://pypi.python.org/pypi/currency-converter/
+    :alt: Development Status
+
+.. image:: https://pypip.in/wheel/currency-converter/badge.svg
+    :target: https://pypi.python.org/pypi/currency-converter/
+    :alt: Wheel Status
+
+.. image:: https://pypip.in/license/currency-converter/badge.svg
+    :target: https://pypi.python.org/pypi/currency-converter/
+    :alt: License
+
+.. image:: https://pypip.in/download/currency-converter/badge.svg
+    :target: https://pypi.python.org/pypi//currency-converter/?period=day
+    :alt: Downloads
+
+
 Installation
 ------------
 
