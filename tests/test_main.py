@@ -3,8 +3,13 @@ import unittest.mock
 
 import pytest
 from click.testing import CliRunner
+from currency_converter.main import (cached_rate, cli, convert,
+                                     get_conversion_rate, google_rate)
 
-from currency_converter.main import cli, convert, get_conversion_rate, google_rate
+
+@pytest.fixture
+def fake_cache():
+    return {('usd', 'gbp'): 0.6}
 
 
 @pytest.yield_fixture
@@ -23,9 +28,11 @@ def fake_html():
     f.close()
 
 
-def test_cache_rate():
-    """Check the cached value for a currency is correctly returned."""
-    pass
+def test_cache_rate(fake_cache):
+    """Test cache rate returns a known item from the cache."""
+    g_cache = 'currency_converter.main.get_cache'
+    with unittest.mock.patch(g_cache, lambda: fake_cache):
+        assert cached_rate('usd', 'gbp') == 0.6
 
 
 def test_cli(fake_html):
