@@ -2,6 +2,7 @@ import os
 import unittest.mock
 
 import pytest
+import requests
 from click.testing import CliRunner
 
 from currency_converter.main import (cached_rate, cli, convert,
@@ -30,6 +31,25 @@ def fake_html():
     f.close()
 
 
+@pytest.fixture
+def patch_write_cache():
+    """
+    Make `write_cache` a noop.
+
+    Useful when we don't care about writing out the cache.
+    """
+    w_cache = 'currency_converter.main.write_cache'
+    return unittest.mock.patch(w_cache, lambda x, y: str)
+
+
+@pytest.fixture
+def patch_get_cache(fake_cache):
+    """Mock `get_cache` and return a known cache dictionary."""
+    g_cache = 'currency_converter.main.get_cache'
+    return unittest.mock.patch(g_cache, lambda: fake_cache)
+
+
+@pytest.fixture
 def test_cache_rate(fake_cache):
     """Test cache rate returns a known item from the cache."""
     g_cache = 'currency_converter.main.get_cache'
@@ -64,6 +84,32 @@ def test_convert_no_to_currency(fake_html):
     with unittest.mock.patch(get_cache, lambda: {'fav': 'test'}):
         with unittest.mock.patch('requests.get', lambda x, timeout: fake_html):
             assert convert(150, 'usd') == (95.73, 'test')
+
+
+def test_fallback_to_cached_rate_on_api_error(patch_write_cache,
+                                              patch_get_cache):
+    """Check the cached rate value is used when the API doesn't respond."""
+    mock = unittest.mock.Mock()
+    mock.side_effect = requests.exceptions.HTTPError()
+    with patch_write_cache:
+        g_rate = 'currency_converter.main.google_rate'
+        with unittest.mock.patch(g_rate, new=mock):
+            with patch_get_cache:
+                rate = get_conversion_rate('usd', 'gbp')
+    assert rate == 0.6
+
+
+def test_fallback_to_cached_rate_when_rate_not_found_in_response(patch_write_cache,
+                                                                 patch_get_cache):
+    """Check the cached rate value is retured when a rate can't be parsed from the API response."""
+    mock = unittest.mock.Mock()
+    mock.side_effect = AttributeError()
+    with patch_write_cache:
+        g_rate = 'currency_converter.main.google_rate'
+        with unittest.mock.patch(g_rate, new=mock):
+            with patch_get_cache:
+                rate = get_conversion_rate('usd', 'gbp')
+    assert rate == 0.6
 
 
 def test_google_rate(fake_html):
