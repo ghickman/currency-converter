@@ -24,8 +24,7 @@ Usage
 
 There three main modes of usage: all options, set a default and use your default.
 
-All Options
-```````````
+**All Options**
 Specify how much to convert, the origin currency and the destination currency.
 
 .. code-block:: bash
@@ -34,8 +33,7 @@ Specify how much to convert, the origin currency and the destination currency.
     63.82 GBP
 
 
-Set a Default
-`````````````
+**Set a Default**
 This works like the previous example but also writes the destination currency to the cache to save you having to specify it again.
 
 .. code-block:: bash
@@ -44,8 +42,7 @@ This works like the previous example but also writes the destination currency to
     63.82 GBP
 
 
-Use the Default
-```````````````
+**Use the Default**
 This method lets you take advantage of the default you set.
 
 .. code-block:: bash
