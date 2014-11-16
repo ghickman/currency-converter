@@ -41,8 +41,7 @@ def get_conversion_rate(from_currency, to_currency):
 
     try:
         rate = google_rate(from_currency, to_currency)
-    except (requests.exceptions.HTTPError, AttributeError) as e:
-        print(e)
+    except (requests.exceptions.HTTPError, AttributeError):
         return cached_rate(from_currency, to_currency)
     else:
         write_cache((from_currency, to_currency), rate)
