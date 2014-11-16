@@ -21,5 +21,9 @@ setup(
         'currency-converter=currency_converter.main:cli',
     ]},
     classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.4',
     ],
 )
