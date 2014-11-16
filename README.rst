@@ -57,6 +57,9 @@ This method lets you take advantage of the default you set.
 Running Tests
 -------------
 
+.. image:: https://travis-ci.org/ghickman/currency-converter.svg?branch=master
+    :target: https://travis-ci.org/ghickman/currency-converter
+
 .. code-block:: bash
 
     make test
