@@ -3,6 +3,7 @@ import unittest.mock
 
 import pytest
 from click.testing import CliRunner
+
 from currency_converter.main import (cached_rate, cli, convert,
                                      get_conversion_rate, google_rate)
 
